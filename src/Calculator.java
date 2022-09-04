@@ -26,6 +26,9 @@ public class Calculator {
     private JButton a3Button;
     private JButton button20;
 
+    double a, b, result;
+    String op;
+
     public Calculator() {
         ACButton.addActionListener(new ActionListener() {
             @Override
@@ -97,6 +100,93 @@ public class Calculator {
             @Override
             public void actionPerformed(ActionEvent e) {
                 txtDisplay.setText(txtDisplay.getText() + a00Button.getText());
+            }
+        });
+        button16.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (txtDisplay.getText().contains(".")){
+                    double pm = Double.parseDouble(txtDisplay.getText());
+                    pm = pm * -1;
+                    txtDisplay.setText(String.valueOf(pm));
+                } else {
+                    long PM = Long.parseLong(txtDisplay.getText());
+                    PM = PM * -1;
+                    txtDisplay.setText(String.valueOf(PM));
+                }
+            }
+        });
+        button20.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!txtDisplay.getText().contains(".")) {
+                    txtDisplay.setText(txtDisplay.getText() + button20.getText());
+                }
+            }
+        });
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a = Double.parseDouble(txtDisplay.getText());
+                op = "+";
+                txtDisplay.setText("");
+            }
+        });
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a = Double.parseDouble(txtDisplay.getText());
+                op = "-";
+                txtDisplay.setText("");
+            }
+        });
+        xButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a = Double.parseDouble(txtDisplay.getText());
+                op = "*";
+                txtDisplay.setText("");
+            }
+        });
+        button11.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                a = Double.parseDouble(txtDisplay.getText());
+                op = "/";
+                txtDisplay.setText("");
+            }
+        });
+        button6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String backspace = null;
+
+                if (txtDisplay.getText().length() > 0) {
+                    StringBuilder strB = new StringBuilder(txtDisplay.getText());
+                    strB.deleteCharAt(txtDisplay.getText().length() - 1);
+                    backspace = String.valueOf(strB);
+                    txtDisplay.setText(backspace);
+                }
+            }
+        });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                b = Double.parseDouble(txtDisplay.getText());
+
+                if (op == "+") {
+                    result = a + b;
+                    txtDisplay.setText(String.valueOf(result));
+                } else if (op == "-"){
+                    result = a - b;
+                    txtDisplay.setText(String.valueOf(result));
+                } else if (op == "*"){
+                    result = a * b;
+                    txtDisplay.setText(String.valueOf(result));
+                } else if (op == "/"){
+                    result = a / b;
+                    txtDisplay.setText(String.valueOf(result));
+                }
             }
         });
     }
